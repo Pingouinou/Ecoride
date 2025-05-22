@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="fr"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRide 🍃</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Simonetta&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #fafafa, #abee90); /* Bleu vers Vert clair */
+    color: #3b1d1d; /* Marron foncé */
+    min-height: 100vh; /* Assure que le fond s'étend sur toute la hauteur de la fenêtre */
+}
+        header {
+            background-color: #8fbc8f; /* Vert forêt clair */
+            color: #ffffff;
+            padding: 1em 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-family: 'Simonetta', cursive; /* Appliquer la police Simonetta au titre */
+            margin: 0; /* Ajustez la marge si nécessaire */
+            font-size: 2em; /* Ajustez la taille si nécessaire */
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 1em;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            padding: 2em;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+        .hero h2 { /* Cibler le h2 contenant "Bienvenue chez EcoRide 🍃" */
+            font-family: 'Simonetta', cursive;
+            color: inherit; /* Hériter de la couleur du body ou la définir si nécessaire */
+        }
+        .hero p { /* Appliquer la police Karla et la couleur aux paragraphes de la section hero */
+            font-family: 'Karla', sans-serif;
+            color: #3d0f16;
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+        .hero p strong { /* Si "EcoRide" est en strong */
+            font-family: 'Simonetta', cursive;
+            color: inherit;
+        }
+        #accueil p:nth-child(1) { /* Cibler le premier paragraphe contenant la mention de la startup */
+            font-family: 'Simonetta', cursive;
+            color: inherit;
+        }
+        #accueil p:nth-child(2) { /* Cibler le deuxième paragraphe contenant l'ambition d'EcoRide */
+            font-family: 'Simonetta', cursive;
+            color: inherit;
+        }
+        .search-bar {
+            display: flex;
+            gap: 0.5em;
+            margin-bottom: 1em;
+        }
+        .search-bar input[type="text"],
+        .search-bar input[type="date"],
+        .search-bar button {
+            padding: 0.5em;
+            border: 1px solid #e8a153;
+            border-radius: 5px;
+            color: #3d0f16; /* Marron foncé */
+        }
+        .search-bar button {
+            background-color: #8fbc8f; /* Vert forêt clair */
+            color: white;
+            cursor: pointer;
+        }
+        .carpool-list {
+            list-style: none;
+            padding: 0;
+        }
+        .carpool-item {
+            background-color: white;
+            border: 1px solid #e8a153;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1em;
+            align-items: center;
+            color: #3d0f16; /* Marron foncé */
+        }
+        .carpool-item .driver-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .carpool-item .driver-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .ecological {
+            color: #388e3c; /* Vert plus foncé pour l'écologique */
+            font-weight: bold;
+        }
+        .details-button {
+            background-color: #43a047; /* Vert vif */
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .filters {
+            margin-bottom: 1.5em;
+            padding: 1em;
+            background-color: #e8f5e9; /* Vert très clair */
+            border: 1px solid #c8e6c9;
+            border-radius: 5px;
+            display: flex;
+            gap: 1em;
+            align-items: center;
+            color: #3b1d1d; /* Marron foncé */
+        }
+        .filters label {
+            margin-right: 0.5em;
+        }
+        .filters input[type="number"],
+        .filters select {
+            padding: 0.3em;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #3d0f16; /* Marron foncé */
+        }
+        .carpool-details {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            color: #3d0f16; /* Marron foncé */
+        }
+        .carpool-details h2 {
+            color: #558b2f;
+        }
+        .preferences ul {
+            list-style: none;
+            padding: 0;
+        }
+        .preferences li {
+            margin-bottom: 0.3em;
+        }
+        .participate-button {
+            background-color: #f5f5f5; /* Bleu pour l'action */
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .auth-section {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            color: #3d0f16; /* Marron foncé */
+        }
+        .auth-section h2 {
+            color: #558b2f;
+        }
+        .auth-section label {
+            display: block;
+            margin-bottom: 0.3em;
+        }
+        .auth-section input[type="text"],
+        .auth-section input[type="email"],
+        .auth-section input[type="password"] {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 0.8em;
+            border: 1px solid #e8a153;
+            border-radius: 3px;
+            box-sizing: border-box;
+            color: #3d0f16; /* Marron foncé */
+        }
+        .auth-section button {
+            background-color: #558b2f;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .user-panel {
+            background-color: white;
+            border: 1px solid #e8a153;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            color: #3d0f16; /* Marron foncé */
+        }
+        .user-panel h2 {
+            color: #558b2f;
+        }
+        .user-panel label {
+            display: block;
+            margin-bottom: 0.3em;
+        }
+        .user-panel input[type="text"],
+        .user-panel input[type="date"],
+        .user-panel select {
+            padding: 0.5em;
+            margin-bottom: 0.8em;
+            border: 1px solid #e8a153;
+            border-radius: 3px;
+            box-sizing: border-box;
+            color: #3d0f16; /* Marron foncé */
+        }
+        footer {
+            background-color: #c8e6c9; /* contact@ecoride.fr */
+            color: #333;
+            padding: 1em 2em;
+            text-align: center;
+            border-top: 1px solid #22d3b5;
+        }
+        footer a {
+            color: #e8a153;
+            text-decoration: none;
+            display: block; /* <a>Mentions légales</a> */
+            margin-bottom: 0.5em;
+        }
+    </style></head><body>
+    <header>
+    <h1 style="margin: 0;"><a href="Ecoride.html" style="color: inherit; text-decoration: none;">EcoRide 🍃</a></h1>
+    <nav>
+        <ul>
+            <li><a href="Ecoride.html">Accueil</a></li>
+            <li><a href="Connexion.html">Connexion</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+    <main>
+        <div class="carpool-details">
+            <h2>Avis sur Aggy (32 ans)</h2>
+            <div class="driver-info" style="display: flex; align-items: center; margin-bottom: 1em;">
+                <img src="Agathe Aggy.png" alt="Photo de Agathe" style="width: 80px; height: 80px; border-radius: 50%; margin-right: 10px;">
+                <li><a href="Profil de Agathe.html"><strong>Aggy</strong></a></li> (Note moyenne : ⭐⭐⭐⭐) </div>
+            <h3>Avis détaillés (6) :</h3>
+            <ul class="reviews-list" style="list-style-type: none; padding-left: 0;">
+                <li style="margin-bottom: 1em; border-bottom: 1px solid #eee; padding-bottom: 1em;">
+                <img src="Lali.B.jpg" alt="Photo de Lali.B" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                    <strong>Lali.B</strong> (⭐⭐⭐⭐⭐)<br>
+                    "Agathe offre un service impeccable. Ponctuelle, voiture propre et conduite sûre. J'ai apprécié le calme pendant le trajet."
+                </li>
+                <li style="margin-bottom: 1em; border-bottom: 1px solid #eee; padding-bottom: 1em;">
+                <img src="Mariananas.jpg" alt="Photo de Mariananas" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                    <strong>Mariananas</strong> (⭐⭐⭐⭐)<br>
+                    "Agathe est une conductrice fiable. Tout s'est déroulé comme prévu, sans retard ni imprévu. Sa voiture est confortable et bien entretenue. Je recommande."
+                </li>
+                <li style="margin-bottom: 1em; border-bottom: 1px solid #eee; padding-bottom: 1em;">
+                <img src="Juju.RC.jpg" alt="Photo de Juju.RC" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                    <strong>Juju.RC</strong> (⭐⭐⭐⭐⭐)<br>
+                    "J'ai voyagé avec Agathe et c'était très bien. Communication claire, conduite agréable. Moins de conversation que d'habitude, mais c'est ce que je recherchais."
+                </li>
+                <li style="margin-bottom: 1em; border-bottom: 1px solid #eee; padding-bottom: 1em;">
+                <img src="Adel.7.jpg" alt="Photo de Adel.7" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                    <strong>Adel.7</strong> (⭐⭐⭐⭐⭐)<br>
+                    "J'ai apprécié la sérénité du voyage avec Agathe. Elle est organisée, sa voiture est propre et elle conduit prudemment. Un excellent choix pour un trajet sans stress."
+                </li>
+                <li style="margin-bottom: 1em; border-bottom: 1px solid #eee; padding-bottom: 1em;">
+                <img src="Djidji.jpg" alt="Photo de Djidji" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                    <strong>Djidji</strong> (⭐⭐⭐⭐)<br>
+                    "Le trajet avec Agathe était conforme à la description. Communication efficace, ponctualité respectée et conduite correcte. Idéal pour ceux qui veulent un voyage sans interaction."
+                </li>
+                <li style="margin-bottom: 1em; border-bottom: 1px solid #eee; padding-bottom: 1em;">
+                <img src="LouisMC.jpg" alt="Photo de LouisMc" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                    <strong>LouisMC</strong> (⭐⭐⭐⭐⭐)<br>
+                    "Agathe offre un service simple et efficace. Elle est à l'heure, sa voiture est confortable et elle respecte le besoin de tranquillité des passagers. Je suis très satisfait."
+                </li>
+            </ul>
+                </ul>
+<a href="Trajet Agathe.html" class="participate-button" style="display: inline-block; margin-top: 1em; background-color: #e8a153; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Retour au Trajet</a>        </div>
+    </main>
+    <footer>
+        <a href="Mentions Légales.html">Mentions légales</a>
+        <a href="mailto:contact@ecoride.fr">contact@ecoride.fr</a>
+        <p>&copy; 2025 EcoRide 🍃 - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

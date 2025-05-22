@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saisie d'un Nouveau Voyage - Espace Chauffeur | EcoRide 🍃</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Simonetta&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Karla', sans-serif; /* Changed to Karla for consistency */
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #fafafa, #abee90); /* EcoRide background */
+            color: #3b1d1d; /* EcoRide dark brown */
+        }
+        header {
+            background-color: #8fbc8f; /* EcoRide header green */
+            color: #ffffff;
+            padding: 1em 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-family: 'Simonetta', cursive;
+            margin: 0;
+            font-size: 2em;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 1em;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-family: 'Simonetta', cursive; /* Applied EcoRide font */
+            color: #558b2f; /* EcoRide green for headings */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc; /* Adjusted border color */
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+            color: #3d0f16; /* EcoRide dark brown for input text */
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .price-info {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .vehicle-options {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .vehicle-options label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+        .vehicle-options input[type="radio"] {
+            margin-right: 5px;
+        }
+        #newVehicleInput {
+            margin-top: 10px;
+            display: none;
+        }
+        button {
+            background-color: #558b2f; /* EcoRide green for buttons */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #43a047; /* Slightly darker green on hover */
+        }
+        .credits-disclaimer {
+            font-size: 0.85em;
+            color: #888;
+            text-align: center;
+            margin-top: 20px;
+        }
+        footer {
+            background-color: #c8e6c9; /* EcoRide footer background */
+            color: #333;
+            padding: 1em 2em;
+            text-align: center;
+            border-top: 1px solid #22d3b5;
+            margin-top: 40px; /* Add some space above the footer */
+        }
+        footer a {
+            color: #e8a153; /* EcoRide link color */
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="margin: 0;"><a href="Ecoride.html" style="color: inherit; text-decoration: none;">EcoRide 🍃</a></h1>
+        <nav>
+            <ul>
+                <li><a href="Ecoride.html">Accueil</a></li>
+                <li><a href="Connexion.html">Connexion</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Saisir un Nouveau Voyage</h1>
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="departureAddress">Adresse de départ :</label>
+                <input type="text" id="departureAddress" name="departureAddress" placeholder="Ex: 10 Rue de la Paix, Paris" required>
+            </div>
+
+            <div class="form-group">
+                <label for="arrivalAddress">Adresse d'arrivée :</label>
+                <input type="text" id="arrivalAddress" name="arrivalAddress" placeholder="Ex: Gare de Lyon, Paris" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Prix du voyage (€) :</label>
+                <input type="number" id="price" name="price" min="0" step="0.01" placeholder="Ex: 25.50" required>
+                <p class="price-info">
+                    <small>Veuillez noter que 2 crédits seront prélevés par la plateforme sur ce montant.</small>
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label>Sélectionnez un véhicule :</label>
+                <div class="vehicle-options">
+                    <div>
+                        <input type="radio" id="selectExistingVehicle" name="vehicleOption" value="existing" checked onchange="toggleNewVehicleInput()">
+                        <label for="selectExistingVehicle">Utiliser un véhicule existant</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="proposeNewVehicle" name="vehicleOption" value="new" onchange="toggleNewVehicleInput()">
+                        <label for="proposeNewVehicle">Proposer un nouveau véhicule</label>
+                    </div>
+                </div>
+
+                <select id="existingVehicleList" name="existingVehicle" class="form-group">
+                    <option value="">-- Sélectionnez un véhicule --</option>
+                    <option value="vehicule1">Renault Clio (AA-123-BB)</option>
+                    <option value="vehicule2">Peugeot 308 (CC-456-DD)</option>
+                    <option value="vehicule3">Citroën C4 (EE-789-FF)</option>
+                </select>
+
+                <input type="text" id="newVehicleInput" name="newVehicle" placeholder="Marque, Modèle, Immatriculation (Ex: Tesla Model 3, GH-012-IJ)">
+            </div>
+
+            <button type="submit">Créer le Voyage</button>
+            <p class="credits-disclaimer">En créant ce voyage, vous acceptez les conditions d'utilisation et le prélèvement de 2 crédits par la plateforme.</p>
+        </form>
+    </div>
+
+    <script>
+        function toggleNewVehicleInput() {
+            const existingVehicleList = document.getElementById('existingVehicleList');
+            const newVehicleInput = document.getElementById('newVehicleInput');
+            const selectExistingRadio = document.getElementById('selectExistingVehicle');
+
+            if (selectExistingRadio.checked) {
+                existingVehicleList.style.display = 'block';
+                newVehicleInput.style.display = 'none';
+                newVehicleInput.removeAttribute('required'); // Remove required when hidden
+                existingVehicleList.setAttribute('required', 'required'); // Add required when visible
+            } else {
+                existingVehicleList.style.display = 'none';
+                newVehicleInput.style.display = 'block';
+                newVehicleInput.setAttribute('required', 'required'); // Add required when visible
+                existingVehicleList.removeAttribute('required'); // Remove required when hidden
+            }
+        }
+
+        // Initial call to set the correct state on page load
+        document.addEventListener('DOMContentLoaded', toggleNewVehicleInput);
+    </script>
+
+    <footer>
+        <p>
+            Contactez-nous : <a href="mailto:votre.adresse@email.com">contact@ecoride.fr</a> |
+            <a href="c:\Users\Samba\Downloads\EcoRide\mentions-legales.html.html">Consulter les Mentions Légales</a>
+        </p>
+    </footer>
+</body>
+</html>

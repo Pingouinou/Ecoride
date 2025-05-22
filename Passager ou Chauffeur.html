@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRide 🍃 - Espace Utilisateur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Simonetta&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #fafafa, #abee90); /* Bleu vers Vert clair */
+            color: #3b1d1d; /* Marron foncé */
+        }
+        header {
+            background-color: #8fbc8f; /* Vert forêt clair */
+            color: #ffffff;
+            padding: 1em 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-family: 'Simonetta', cursive; /* Appliquer la police Simonetta au titre */
+            margin: 0; /* Ajustez la marge si nécessaire */
+            font-size: 2em; /* Ajustez la taille si nécessaire */
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 1em;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            padding: 2em;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+        .hero h2 {
+            font-family: 'Simonetta', cursive;
+            color: inherit;
+        }
+        .hero p {
+            font-family: 'Karla', sans-serif;
+            color: #3d0f16;
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+        .hero p strong {
+            font-family: 'Simonetta', cursive;
+            color: inherit;
+        }
+        .role-selection {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+        .role-selection button {
+            background-color: #558b2f; /* Vert pour les boutons de sélection de rôle */
+            color: white;
+            border: none;
+            padding: 1em 2em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 0 1em;
+            transition: background-color 0.3s ease;
+        }
+        .role-selection button:hover {
+            background-color: #388e3c; /* Vert plus foncé au survol */
+        }
+        .search-bar, .carpool-list, .filters, .carpool-details, .auth-section, .user-panel, #chauffeur-content, #passager-content, #ride-history-section, #passenger-reviews {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            color: #3d0f16;
+        }
+        .search-bar {
+            display: flex;
+            gap: 0.5em;
+        }
+        .search-bar input[type="text"],
+        .search-bar input[type="date"],
+        .search-bar button {
+            padding: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #3d0f16;
+        }
+        .search-bar button {
+            background-color: #8fbc8f;
+            color: white;
+            cursor: pointer;
+        }
+        .carpool-list {
+            list-style: none;
+            padding: 0;
+        }
+        .carpool-item {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1em;
+            align-items: center;
+            color: #3d0f16;
+        }
+        .carpool-item .driver-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .carpool-item .driver-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .ecological {
+            color: #388e3c;
+            font-weight: bold;
+        }
+        .details-button {
+            background-color: #43a047;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .filters {
+            margin-bottom: 1.5em;
+            padding: 1em;
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 5px;
+            display: flex;
+            gap: 1em;
+            align-items: center;
+            color: #3b1d1d;
+        }
+        .filters label {
+            margin-right: 0.5em;
+        }
+        .filters input[type="number"],
+        .filters select {
+            padding: 0.3em;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #3d0f16;
+        }
+        .carpool-details h2 {
+            color: #558b2f;
+        }
+        .preferences ul {
+            list-style: none;
+            padding: 0;
+        }
+        .preferences li {
+            margin-bottom: 0.3em;
+        }
+        .participate-button {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .auth-section h2, .user-panel h2 {
+            color: #558b2f;
+        }
+        .auth-section label, .user-panel label {
+            display: block;
+            margin-bottom: 0.3em;
+        }
+        .auth-section input[type="text"],
+        .auth-section input[type="email"],
+        .auth-section input[type="password"],
+        .user-panel input[type="text"],
+        .user-panel input[type="date"],
+        .user-panel select {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 0.8em;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            color: #3d0f16;
+        }
+        .auth-section button {
+            background-color: #558b2f;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        footer {
+            background-color: #c8e6c9;
+            color: #333;
+            padding: 1em 2em;
+            text-align: center;
+            border-top: 1px solid #22d3b5;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #e8a153;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        .important {
+            font-weight: bold;
+            color: #d84315;
+        }
+        .note {
+            font-size: 0.8em;
+            color: #757575;
+            font-style: italic;
+        }
+
+        /* Styles for specific driver sections and elements */
+        #chauffeur-content, #passager-content, #ride-history-section, #passenger-reviews {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            padding: 1.5em;
+            margin-bottom: 1.5em;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            color: #3d0f16;
+        }
+        #chauffeur-content h2, #formulaire-voyage h3, #passager-content h2, #ride-history-section h2, #passenger-reviews h2 {
+            color: #558b2f;
+            text-align: center;
+            margin-bottom: 1em;
+        }
+        #formulaire-voyage div {
+            margin-bottom: 1em;
+        }
+        #formulaire-voyage label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+        #formulaire-voyage input[type="text"],
+        #formulaire-voyage input[type="number"],
+        #formulaire-voyage select {
+            width: 100%;
+            padding: 0.7em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        #formulaire-voyage button {
+            background-color: #558b2f;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            margin-top: 1em;
+        }
+        #formulaire-voyage button:hover {
+            background-color: #4CAF50;
+        }
+        /* Custom class for green text */
+        .green-text {
+            color: green;
+        }
+
+        /* Style for checkbox label */
+        #formulaire-voyage .checkbox-container {
+            display: flex; /* Aligns checkbox and label horizontally */
+            align-items: center; /* Vertically centers them */
+            margin-top: 0.5em; /* Space above */
+            margin-bottom: 1em; /* Space below */
+        }
+        #formulaire-voyage .checkbox-container label {
+            display: inline; /* Keep label inline with checkbox */
+            margin-bottom: 0; /* Remove default block margin */
+            margin-left: 0.5em; /* Space between checkbox and label */
+            font-weight: normal; /* Normal font weight for this label */
+        }
+        #formulaire-voyage .checkbox-container input[type="checkbox"] {
+            width: auto; /* Allow checkbox to take its natural width */
+            margin: 0; /* Remove default input margins */
+        }
+
+        /* Styles for ride history */
+        .ride-history {
+            margin-top: 20px;
+        }
+        .ride-card {
+            background-color: #e8f5e9; /* Vert très clair */
+            border: 1px solid #c8e6c9; /* Bordure verte claire */
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: #3b1d1d; /* Marron foncé */
+        }
+        .ride-details {
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+        .ride-details p {
+            margin: 5px 0;
+        }
+        .ride-actions {
+            flex-shrink: 0;
+        }
+        .ride-actions button {
+            background-color: #dc3545; /* Rouge pour annuler */
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+        .ride-actions button:hover {
+            background-color: #c82333; /* Rouge plus foncé au survol */
+        }
+        .ride-status {
+            font-weight: bold;
+            color: #28a745; /* Vert pour les covoiturages actifs */
+        }
+        .ride-status.cancelled {
+            color: #dc3545; /* Rouge pour les covoiturages annulés */
+        }
+        .no-rides {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+        }
+
+        /* Styles for passenger reviews */
+        .review-card {
+            background-color: #f7f7f7;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        .review-card p {
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+        .review-card .reviewer-name {
+            font-weight: bold;
+            color: #558b2f;
+        }
+        .review-card .review-text {
+            font-style: italic;
+        }
+        .review-card .review-rating {
+            color: #e8a153; /* Orange pour les étoiles ou la note */
+            font-weight: bold;
+        }
+        .review-card img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        /* Style for Ophelia's profile image */
+        .profile-image {
+            width: 100px; /* Adjust size as needed */
+            height: 100px; /* Should be same as width for a perfect circle */
+            border-radius: 50%; /* Makes the image round */
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+            display: block; /* Centers the image */
+            margin: 0 auto 1em auto; /* Centers the image and adds space below */
+            border: 3px solid #8fbc8f; /* Optional: adds a border around the image */
+        }
+
+        /* Styles pour la modale de confirmation */
+        .modal {
+            display: none; /* Cachée par défaut */
+            position: fixed; /* Reste en place */
+            z-index: 1; /* Par-dessus tout */
+            left: 0;
+            top: 0;
+            width: 100%; /* Pleine largeur */
+            height: 100%; /* Pleine hauteur */
+            overflow: auto; /* Active le défilement si nécessaire */
+            background-color: rgba(0,0,0,0.4); /* Fond noir avec opacité */
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 25px;
+            border: 1px solid #888;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            color: #3b1d1d; /* Marron foncé */
+        }
+        .modal-content h2 {
+            margin-top: 0;
+            color: #558b2f; /* Couleur de titre cohérente */
+        }
+        .modal-buttons button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .modal-buttons .confirm {
+            background-color: #dc3545;
+            color: white;
+        }
+        .modal-buttons .confirm:hover {
+            background-color: #c82333;
+        }
+        .modal-buttons .cancel {
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+        .modal-buttons .cancel:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="margin: 0;"><a href="Ecoride.html" onclick="showRoleSelection()" style="color: inherit; text-decoration: none;">EcoRide 🍃</a></h1>
+        <nav>
+            <ul>
+                <li><a href="Ecoride.html" onclick="showRoleSelection()">Accueil</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Ecoride.html" id="logoutButton">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Espace Utilisateur</h1>
+
+        <div id="roleSelection" class="role-selection">
+            <h2>Que souhaitez-vous faire ?</h2>
+            <button id="proposeTripBtn">Proposer un voyage</button>
+            <button id="searchTripBtn">Rechercher un voyage</button>
+
+<script>
+    document.getElementById('searchTripBtn').addEventListener('click', function() {
+        window.location.href = "Espace Passager.html";
+    });
+</script>
+        </div>
+
+        <div id="chauffeur-content" style="display: none;">
+            <h2 id="espace-chauffeur">Espace Chauffeur</h2>
+            <p id="instruction-chauffeur">
+                En tant que <span class="important">Opélia</span>, vous pouvez saisir un nouveau voyage.
+            </p>
+
+            <img src="Opélia.jpg" alt="Photo de Opélia" class="profile-image">
+            <p>
+                Moi, c'est <span class="important">Ophélia</span> ! Je suis dans le début de la trentaine, j'habite dans une ville qui bouge bien : **Bordeaux**.
+                Je suis **jeune professionnelle dans la com'**, un domaine où il faut être créative et bien organisée. Mon job m'amène à pas mal me déplacer.
+                <br>
+            </p>
+            <p>
+                Note moyenne : ⭐⭐⭐⭐
+            </p>
+
+            <div id="formulaire-voyage">
+                <h3>Saisir un Nouveau Voyage</h3>
+                <form id="nouveauVoyageForm">
+                    <input type="hidden" id="userId" name="userId" value="ID_DE_OPHELIA">
+                    <div>
+                        <label for="depart">Adresse de départ:</label>
+                        <input type="text" id="depart" name="depart" list="cityOptions" required placeholder="Rechercher une ville...">
+                    </div>
+                    <div>
+                        <label for="arrivee">Adresse d'arrivée:</label>
+                        <input type="text" id="arrivee" name="arrivee" list="cityOptions" required placeholder="Rechercher une ville...">
+                    </div>
+
+                    <datalist id="cityOptions"></datalist>
+
+                    <div>
+                        <label for="prix">Prix proposé (€):</label>
+                        <input type="number" id="prix" name="prix" min="0" step="0.01" required>
+                        <p class="note">Note: 2 crédits seront déduits par la plateforme.</p>
+                    </div>
+                    <div>
+                        <label for="vehicule">Sélectionner un véhicule existant:</label>
+                        <select id="vehicule" name="vehicule">
+                            <option value="">-- Sélectionner un véhicule existant --</option>
+                            <option value="vehicule1">NISSAN Micra IV Verte (Immatriculation: RR-231-CD) Véhicule Non Électrique</option>
+                            <option value="vehicule2">MINI III Cooper Argent (Immatriculation: ER-754-JH) <span class="green-text">Véhicule Électrique 🌱</span></option>
+                        </select>
+                    </div>
+                    <div>
+                        <h3>Proposer un Nouveau Véhicule</h3>
+                        <label for="nouveau_vehicule_modele">Marque et Modèle:</label>
+                        <input type="text" id="nouveau_vehicule_modele" name="nouveau_vehicule_modele" list="carModels" placeholder="Ex: Renault Clio ou Tesla Model 3">
+                        <label for="nouvelle_immatriculation">Immatriculation:</label>
+                        <input type="text" id="nouvelle_immatriculation" name="nouvelle_immatriculation">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="nouveau_vehicule_electrique" name="nouveau_vehicule_electrique">
+                            <label for="nouveau_vehicule_electrique">Véhicule Électrique 🌱</label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Préférences du Voyageur</h3>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="preference_fumer" name="preference_fumer">
+                            <label for="preference_fumer">🚬 La cigarette</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="preference_animaux" name="preference_animaux">
+                            <label for="preference_animaux">🐶🐱 Les animaux</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="preference_parler" name="preference_parler">
+                            <label for="preference_parler">🗣️ Discuter</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="preference_musique" name="preference_musique">
+                            <label for="preference_musique">🎶 La usique</label>
+                        </div>
+                    </div>
+
+
+                    <datalist id="carModels">
+                        <option value="Audi A1"></option>
+                        <option value="Audi A3"></option>
+                        <option value="Audi A4"></option>
+                        <option value="Audi Q3"></option>
+                        <option value="Audi Q5"></option>
+                        <option value="BMW Série 1"></option>
+                        <option value="BMW Série 3"></option>
+                        <option value="BMW X1"></option>
+                        <option value="BMW X3"></option>
+                        <option value="Citroën C3"></option>
+                        <option value="Citroën C4"></option>
+                        <option value="Citroën C5 Aircross"></option>
+                        <option value="Dacia Sandero"></option>
+                        <option value="Dacia Duster"></option>
+                        <option value="Fiat 500"></option>
+                        <option value="Fiat Tipo"></option>
+                        <option value="Ford Fiesta"></option>
+                        <option value="Ford Focus"></option>
+                        <option value="Ford Puma"></option>
+                        <option value="Hyundai i10"></option>
+                        <option value="Hyundai i20"></option>
+                        <option value="Hyundai Kona"></option>
+                        <option value="Kia Picanto"></option>
+                        <option value="Kia Rio"></option>
+                        <option value="Kia Sportage"></option>
+                        <option value="Mercedes-Benz Classe A"></option>
+                        <option value="Mercedes-Benz Classe C"></option>
+                        <option value="Mercedes-Benz GLC"></option>
+                        <option value="MINI Cooper"></option>
+                        <option value="MINI Countryman"></option>
+                        <option value="Nissan Juke"></option>
+                        <option value="Nissan Qashqai"></option>
+                        <option value="Nissan Micra"></option>
+                        <option value="Opel Corsa"></option>
+                        <option value="Opel Astra"></option>
+                        <option value="Opel Mokka"></option>
+                        <option value="Peugeot 208"></option>
+                        <option value="Peugeot 308"></option>
+                        <option value="Peugeot 2008"></option>
+                        <option value="Peugeot 3008"></option>
+                    </datalist>
+
+                    <button type="submit">Proposer le voyage</button>
+                </form>
+            </div>
+
+
+
+            <div id="passenger-reviews">
+                <h2>Avis des Passagers</h2>
+
+                <div class="review-card">
+                    <p class="reviewer-name"><img src="Barbarapa.jpg" alt="Photo de Barbarapa"> Barbarapa, 28 ans</p>
+                    <p class="review-rating">Note : 5/5 ⭐⭐⭐⭐⭐</p>
+                    <p class="review-text">"Super trajet avec Opélia ! Sa voiture est nickel, elle conduit vraiment bien et en douceur. On a papoté un peu, c'était très agréable et elle est super ponctuelle. Je recommande à 100% !"</p>
+                </div>
+
+                <div class="review-card">
+                    <p class="reviewer-name"><img src="M.Kus.jpg" alt="Photo de M.kus"> M.kus, 45 ans</p>
+                    <p class="review-rating">Note : 4/5 ⭐⭐⭐⭐</p>
+                    <p class="review-text">"Trajet Paris-Lyon avec Opélia. Très pro, la voiture est confortable. J'ai pu travailler tranquillement sur mon ordinateur pendant le trajet, elle respecte l'ambiance que tu souhaites. Nickel !"</p>
+                </div>
+
+                <div class="review-card">
+                    <p class="reviewer-name"><img src="Lélé.jpg" alt="Photo de Lélé"> Lélé, 21 ans</p>
+                    <p class="review-rating">Note : 5/5 ⭐⭐⭐⭐⭐</p>
+                    <p class="review-text">"Ophélia est top ! Super sympa, on a bien rigolé. L'ambiance était cool, on a même mis de la musique en commun. Franchement, c'est le genre de covoit' que tu refais sans hésiter."</p>
+                </div>
+
+                <div class="review-card">
+                    <p class="reviewer-name"><img src="Julesdepommes.jpg" alt="Photo de Julesdepommes"> Julesdepommes, 35 ans</p>
+                    <p class="review-rating">Note : 4/5 ⭐⭐⭐⭐</p>
+                    <p class="review-text">"J'ai voyagé plusieurs fois avec Opélia, et c'est toujours un plaisir. Toujours à l'heure, voiture propre. Elle est discrète si tu préfères le silence, mais aussi ouverte à la discussion. La conductrice idéale pour un long trajet."</p>
+                </div>
+            </div>
+
+
+
+            <div id="ride-history-section">
+                <h2>Historique de mes covoiturages</h2>
+                <div class="ride-history" id="rideHistory">
+                    <div class="ride-card" data-ride-id="123">
+                        <div class="ride-details">
+                            <p><strong>Départ :</strong> Paris</p>
+                            <p><strong>Arrivée :</strong> Lyon</p>
+                            <p><strong>Date :</strong> 25/05/2025 à 10h00</p>
+                            <p><strong>Places disponibles :</strong> 2/4</p>
+                            <p><strong>Crédit généré :</strong> 15 €</p>
+                            <p class="ride-status">Statut : Actif</p>
+                            <p><strong>Participants :</strong> Jean Dupont, Marie Curie</p>
+                        </div>
+                        <div class="ride-actions">
+                            <button onclick="confirmCancellation('123', 'Paris à Lyon le 25/05/2025')">Annuler ce covoiturage</button>
+                        </div>
+                    </div>
+
+                    <div class="ride-card" data-ride-id="124">
+                        <div class="ride-details">
+                            <p><strong>Départ :</strong> Marseille</p>
+                            <p><strong>Arrivée :</strong> Nice</p>
+                            <p><strong>Date :</strong> 28/05/2025 à 14h30</p>
+                            <p><strong>Places disponibles :</strong> 0/3</p>
+                            <p><strong>Crédit généré :</strong> 10 €</p>
+                            <p class="ride-status">Statut : Actif</p>
+                            <p><strong>Participants :</strong> Paul Martin, Sophie Dubois, Pierre Leblanc</p>
+                        </div>
+                        <div class="ride-actions">
+                            <button onclick="confirmCancellation('124', 'Marseille à Nice le 28/05/2025')">Annuler ce covoiturage</button>
+                        </div>
+                    </div>
+
+                    <div class="ride-card" data-ride-id="125">
+                        <div class="ride-details">
+                            <p><strong>Départ :</strong> Bordeaux</p>
+                            <p><strong>Arrivée :</strong> Toulouse</p>
+                            <p><strong>Date :</strong> 20/05/2025 à 08h00</p>
+                            <p><strong>Places :</strong> 4</p>
+                            <p><strong>Crédit :</strong> 20 €</p>
+                            <p class="ride-status cancelled">Statut : Annulé</p>
+                            <p><strong>Participants :</strong> (Aucun, ou liste des participants au moment de l'annulation)</p>
+                        </div>
+                        <div class="ride-actions">
+                            <button disabled style="background-color: #6c757d; cursor: not-allowed;">Annulé</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="passengerSection" style="display: none;">
+            <h2>Rechercher un Voyage</h2>
+            <p>En tant que <span class="important">passager</span>, vous pouvez rechercher un covoiturage.</p>
+
+            <div class="search-bar">
+                <label for="searchDepart" class="sr-only">Départ</label>
+                <input type="text" id="searchDepart" placeholder="Ville de départ">
+
+                <label for="searchArrivee" class="sr-only">Arrivée</label>
+                <input type="text" id="searchArrivee" placeholder="Ville d'arrivée">
+
+                <label for="searchDate" class="sr-only">Date</label>
+                <input type="date" id="searchDate">
+                <button type="button">Rechercher</button>
+            </div>
+
+            <div class="filters">
+                <label for="priceMax">Prix max:</label>
+                <input type="number" id="priceMax" min="0" placeholder="€">
+                <label for="seatsAvailable">Places dispo:</label>
+                <input type="number" id="seatsAvailable" min="1" placeholder="Nb.">
+                <label for="driverRating">Note chauffeur min:</label>
+                <select id="driverRating">
+                    <option value="">Toutes</option>
+                    <option value="4">4 étoiles et plus</option>
+                    <option value="3">3 étoiles et plus</option>
+                </select>
+            </div>
+
+            <ul class="carpool-list">
+                <li class="carpool-item">
+                    <div class="driver-info">
+                        <img src="https://via.placeholder.com/50" alt="Photo de profil du conducteur">
+                        <span>Alice Dupont</span>
+                    </div>
+                    <div>
+                        <p><strong>Caen ➡️ La Rochelle</strong></p>
+                        <p>Date: 25/05/2025 à 10:00</p>
+                        <p>Places disponibles: 2</p>
+                    </div>
+                    <div>
+                        <span class="ecological">15€</span>
+                        <button class="details-button">Détails</button>
+                    </div>
+                </li>
+                <li class="carpool-item">
+                    <div class="driver-info">
+                        <img src="https://via.placeholder.com/50" alt="Photo de profil du conducteur">
+                        <span>Bob Martin</span>
+                    </div>
+                    <div>
+                        <p><strong>Dijon ➡️ Lyon</strong></p>
+                        <p>Date: 26/05/2025 à 14:30</p>
+                        <p>Places disponibles: 3</p>
+                    </div>
+                    <div>
+                        <span class="ecological">20€</span>
+                        <button class="details-button">Détails</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <div id="cancellationModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmer l'annulation</h2>
+            <p>Êtes-vous sûr de vouloir annuler le covoiturage <strong id="rideDescription"></strong> ?</p>
+            <p>Cette action est irréversible. Les participants seront notifiés par e-mail.</p>
+            <div class="modal-buttons">
+                <button class="confirm" id="confirmCancelBtn">Confirmer l'annulation</button>
+                <button class="cancel" onclick="closeModal()">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <footer>
+        <a href="Mentions Légales.html">Mentions légales</a>
+        <a href="mailto:contact@ecoride.fr">contact@ecoride.fr</a>
+        <p>&copy; 2025 EcoRide 🍃 - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
+
+    <script>
+        const roleSelection = document.getElementById('roleSelection');
+        const chauffeurContent = document.getElementById('chauffeur-content');
+        const passengerSection = document.getElementById('passengerSection');
+        const proposeTripBtn = document.getElementById('proposeTripBtn');
+        const searchTripBtn = document.getElementById('searchTripBtn');
+
+        function showRoleSelection() {
+            roleSelection.style.display = 'block';
+            chauffeurContent.style.display = 'none';
+            passengerSection.style.display = 'none';
+        }
+
+        proposeTripBtn.addEventListener('click', function() {
+            roleSelection.style.display = 'none';
+            chauffeurContent.style.display = 'block';
+            passengerSection.style.display = 'none';
+        });
+
+        searchTripBtn.addEventListener('click', function() {
+            roleSelection.style.display = 'none';
+            chauffeurContent.style.display = 'none';
+            passengerSection.style.display = 'block';
+        });
+
+        // Data for all French cities (for demonstration purposes)
+        const allFrenchCities = [
+            "Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Strasbourg",
+            "Montpellier", "Bordeaux", "Lille", "Rennes", "Reims", "Le Havre",
+            "Saint-Étienne", "Toulon", "Grenoble", "Dijon", "Nîmes", "Angers",
+            "Villeurbanne", "Le Mans", "La Rochelle", "Clermont-Ferrand", "Brest",
+            "Limoges", "Tours", "Amiens", "Perpignan", "Metz", "Besançon", "Orléans",
+            "Mulhouse", "Rouen", "Caen", "Nancy", "Argenteuil", "Montreuil", "Saint-Denis",
+            "Avignon", "Tours", "Annecy", "Biarritz", "Poitiers", "Versailles", "Antibes",
+            "Cannes", "Dunkerque", "Colmar", "Bourges", "Calais", "Fréjus", "Narbonne",
+            "Bayonne", "Troyes", "Niort", "Pau", "Biarritz", "Cherbourg", "Laval", "Chambéry",
+            "Vannes", "Arles", "Ajaccio", "Blois", "Compiègne", "Montauban", "Brive-la-Gaillarde",
+            "Saint-Malo", "Quimper", "Chartres", "Gap","Saint-Nazaire","Valence", "La Roche-sur-Yon","Montluçon",
+            "Versailles", "Créteil", "Argenteuil", "La Garenne-Colombes","Pau", "Dijon"
+        ];
+
+        const cityDatalist = document.getElementById('cityOptions');
+        allFrenchCities.forEach(city => {
+            const option = document.createElement('option');
+            option.value = city;
+            cityDatalist.appendChild(option);
+        });
+
+        // Dummy logout function (you'd replace this with actual authentication logic)
+        document.getElementById('logoutButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            alert('Vous avez été déconnecté.');
+            window.location.href = '#'; // Redirect to the current page to show role selection again
+        });
+
+        // Form submission handling for the new trip proposal
+        document.getElementById('nouveauVoyageForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const userId = document.getElementById('userId').value;
+            const depart = document.getElementById('depart').value;
+            const arrivee = document.getElementById('arrivee').value;
+            const prix = document.getElementById('prix').value;
+            const vehicule = document.getElementById('vehicule').value;
+            const nouveauVehiculeModele = document.getElementById('nouveau_vehicule_modele').value;
+            const nouvelleImmatriculation = document.getElementById('nouvelle_immatriculation').value;
+            const nouveauVehiculeElectrique = document.getElementById('nouveau_vehicule_electrique').checked; // Get checkbox state
+
+            // Get traveler preferences
+            const preferenceFumer = document.getElementById('preference_fumer').checked;
+            const preferenceAnimaux = document.getElementById('preference_animaux').checked;
+            const preferenceParler = document.getElementById('preference_parler').checked;
+            const preferenceMusique = document.getElementById('preference_musique').checked;
+
+
+            // Basic validation for trip details
+            if (!depart || !arrivee || !prix) {
+                alert('Veuillez remplir tous les champs obligatoires pour le voyage (Adresses et Prix).');
+                return;
+            }
+
+            let selectedVehicleInfo = "";
+            // Check if an existing vehicle was selected from the dropdown
+            if (vehicule) {
+                selectedVehicleInfo = `Véhicule sélectionné: ${document.getElementById('vehicule').options[document.getElementById('vehicule').selectedIndex].text}`;
+            }
+            // Otherwise, check if new vehicle details were provided
+            else if (nouveauVehiculeModele && nouvelleImmatriculation) {
+                const electricStatus = nouveauVehiculeElectrique ? "Véhicule Électrique 🌱" : "Véhicule Non Électrique";
+                selectedVehicleInfo = `Nouveau véhicule proposé: ${nouveauVehiculeModele} (Immatriculation: ${nouvelleImmatriculation}) ${electricStatus}`;
+            }
+            // If neither option was filled
+            else {
+                alert('Veuillez sélectionner un véhicule existant OU proposer un nouveau véhicule (Marque/Modèle et Immatriculation).');
+                return;
+            }
+
+            const message = `
+Nouveau voyage proposé par l'utilisateur (ID: ${userId}):
+Départ: ${depart}
+Arrivée: ${arrivee}
+Prix proposé: ${parseFloat(prix).toFixed(2)} €
+${selectedVehicleInfo}
+Préférences du voyageur :
+    Fumer : ${preferenceFumer ? 'Accepté' : 'Non accepté'}
+    Animaux : ${preferenceAnimaux ? 'Accepté' : 'Non accepté'}
+    Conversation : ${preferenceParler ? 'Acceptée' : 'Non acceptée'}
+    Musique : ${preferenceMusique ? 'Acceptée' : 'Non acceptée'}
+            `;
+
+            alert(message);
+
+            // Here you would typically send this data to a server
+            // Example: fetch('/api/propose-voyage', { method: 'POST', body: JSON.stringify({ depart, arrivee, prix, vehicule, nouveauVehiculeModele, nouvelleImmatriculation, nouveauVehiculeElectrique, preferenceFumer, preferenceAnimaux, preferenceParler, preferenceMusique }), headers: { 'Content-Type': 'application/json' }})
+            // .then(response => response.json())
+            // .then(data => console.log(data))
+            // .catch(error => console.error('Error:', error));
+
+            // Optionally clear the form
+            this.reset();
+        });
+
+        // JavaScript for the Cancellation Modal (from your provided code)
+        let rideToCancelId = null; // Variable to store the ID of the ride to cancel
+
+        function confirmCancellation(rideId, rideDescription) {
+            rideToCancelId = rideId;
+            document.getElementById('rideDescription').innerText = rideDescription;
+            document.getElementById('cancellationModal').style.display = 'flex'; // Show the modal
+        }
+
+        function closeModal() {
+            document.getElementById('cancellationModal').style.display = 'none'; // Hide the modal
+            rideToCancelId = null;
+        }
+
+        document.getElementById('confirmCancelBtn').addEventListener('click', function() {
+            if (rideToCancelId) {
+                console.log('Annulation confirmée pour le covoiturage ID :', rideToCancelId);
+                // In a real application, you'd send an AJAX request to your backend here.
+                // For this example, we simulate the cancellation visually on the client-side.
+
+                alert('Covoiturage annulé avec succès (simulation) ! Un e-mail sera envoyé aux participants.');
+                const rideCard = document.querySelector(`.ride-card[data-ride-id="${rideToCancelId}"]`);
+                if (rideCard) {
+                    rideCard.querySelector('.ride-status').innerText = 'Statut : Annulé';
+                    rideCard.querySelector('.ride-status').classList.add('cancelled');
+                    const cancelButton = rideCard.querySelector('.ride-actions button');
+                    if (cancelButton) {
+                        cancelButton.innerText = 'Annulé';
+                        cancelButton.disabled = true;
+                        cancelButton.style.backgroundColor = '#6c757d';
+                        cancelButton.style.cursor = 'not-allowed';
+                    }
+                }
+                closeModal();
+            }
+        });
+
+        // Initially show role selection
+        showRoleSelection();
+    </script>
+
+</body>
+</html>

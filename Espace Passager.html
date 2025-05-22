@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRide 🍃 - Espace Passager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Simonetta&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #fafafa, #abee90);
+            color: #3b1d1d;
+            min-height: 100vh; /* Assure que le fond s'étend sur toute la hauteur de la fenêtre */
+        }
+        header {
+            background-color: #8fbc8f;
+            color: #ffffff;
+            padding: 1em 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-family: 'Simonetta', cursive;
+            margin: 0;
+            font-size: 2em;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 1em;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            padding: 2em;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+        .hero h2 {
+            font-family: 'Simonetta', cursive;
+            color: inherit;
+        }
+        .hero p {
+            font-family: 'Karla', sans-serif;
+            color: #3d0f16;
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+        .hero p strong {
+            font-family: 'Simonetta', cursive;
+            color: inherit;
+        }
+        .search-bar {
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            gap: 0.8em; /* Slightly increased gap */
+            margin-bottom: 2em; /* More space below search bar */
+            padding: 1.5em; /* Add padding to the search bar container */
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            align-items: flex-end; /* Align inputs and button at the bottom */
+        }
+        .search-bar div { /* Style for each input group */
+            flex: 1; /* Allow items to grow */
+            min-width: 150px; /* Minimum width before wrapping */
+        }
+        .search-bar label {
+            display: block;
+            margin-bottom: 0.4em;
+            font-weight: bold;
+            color: #558b2f; /* Green for labels */
+        }
+        .search-bar input[type="text"],
+        .search-bar input[type="date"] {
+            width: 100%; /* Full width within its div */
+            padding: 0.8em; /* Increased padding */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #3d0f16;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        .search-bar button {
+            padding: 0.8em 1.5em; /* Larger button */
+            background-color: #8fbc8f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .search-bar button:hover {
+            background-color: #7bb27b;
+        }
+
+        .filters {
+            margin-bottom: 2em; /* More space below filters */
+            padding: 1.5em;
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5em; /* More space between filters */
+            align-items: center;
+            color: #3b1d1d;
+        }
+        .filters div { /* Style for each filter group */
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .filters label {
+            font-weight: bold;
+            color: #558b2f;
+        }
+        .filters input[type="number"],
+        .filters select {
+            padding: 0.6em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #3d0f16;
+        }
+
+        .carpool-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 1.5em; /* Space between carpool items */
+        }
+        .carpool-item {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            padding: 1.5em; /* Increased padding */
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: auto 1fr auto; /* Driver info | Details | Button */
+            gap: 1.5em; /* Gap within the item */
+            align-items: center;
+            color: #3d0f16;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Soft shadow for items */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .carpool-item:hover {
+            transform: translateY(-3px); /* Subtle lift effect */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .carpool-item .driver-info {
+            display: flex;
+            flex-direction: column; /* Stack name and rating */
+            align-items: center;
+            gap: 0.5em;
+            text-align: center;
+        }
+        .carpool-item .driver-info img {
+            width: 60px; /* Larger avatar */
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #8fbc8f; /* Green border for avatar */
+        }
+        .carpool-item .driver-info span {
+            font-weight: bold;
+            color: #558b2f;
+        }
+        .carpool-item .carpool-details-summary {
+            font-size: 1.1em; /* Slightly larger text for summary */
+            line-height: 1.5;
+        }
+        .carpool-item .carpool-details-summary strong {
+            color: #388e3c; /* Darker green for key info */
+        }
+        .ecological {
+            color: #388e3c;
+            font-weight: bold;
+        }
+        .non-ecological {
+            color: #ff0000; /* Red for non-ecological */
+            font-weight: bold;
+        }
+        .details-button {
+            background-color: #43a047;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .details-button:hover {
+            background-color: #388e3c;
+        }
+
+        /* Styles for the full carpool details section (when clicked) */
+        .carpool-details-expanded {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            padding: 2em;
+            margin-top: 1.5em;
+            margin-bottom: 2em;
+            border-radius: 8px;
+            color: #3d0f16;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            display: none; /* Hidden by default */
+            grid-column: 1 / -1; /* Spans across all columns of the parent grid */
+        }
+        .carpool-details-expanded h3 {
+            color: #558b2f;
+            margin-bottom: 1em;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5em;
+        }
+        .carpool-details-expanded p {
+            margin-bottom: 0.8em;
+            font-size: 1.05em;
+        }
+        .carpool-details-expanded strong {
+            color: #388e3c;
+        }
+        .carpool-details-expanded .preferences ul {
+            list-style: disc inside;
+            padding-left: 1em;
+            margin-top: 0.5em;
+        }
+        .carpool-details-expanded .participate-button {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1.5em;
+            width: auto;
+            display: block; /* Make it a block element for full width if desired, or inline-block */
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .carpool-details-expanded .participate-button:hover {
+            background-color: #1565c0;
+        }
+
+        footer {
+            background-color: #c8e6c9;
+            color: #333;
+            padding: 1em 2em;
+            text-align: center;
+            border-top: 1px solid #22d3b5;
+        }
+        footer a {
+            color: #e8a153;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        .important {
+            font-weight: bold;
+            color: #d84315;
+        }
+        .note {
+            font-size: 0.8em;
+            color: #757575;
+            font-style: italic;
+        }
+        .star-rating {
+            color: #FFD700; /* Gold color for stars */
+            font-size: 1em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 767px) {
+            .search-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-bar button {
+                width: 100%;
+                margin-top: 1em;
+            }
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .carpool-item {
+                grid-template-columns: 1fr; /* Stack elements on small screens */
+                text-align: center;
+            }
+            .carpool-item .driver-info {
+                flex-direction: row; /* Keep driver info in a row */
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="Ecoride.html" style="color: inherit; text-decoration: none;">EcoRide 🍃</a></h1>
+        <nav>
+            <ul>
+                <li><a href="Ecoride.html">Accueil</a></li>
+                <li><a href="Connexion.html">Connexion</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Espace Passager</h1>
+
+        <p id="instruction-passager">
+            En tant que <span class="important">passager</span>, trouvez le covoiturage idéal pour vos trajets.
+        </p>
+
+        <div class="search-bar">
+<div>
+    <label for="depart-search">Départ:</label>
+    <input type="text" id="depart-search" placeholder="Ville de départ" list="villes-depart-suggestions">
+    <datalist id="villes-depart-suggestions">
+        <option value="Pau"></option>
+        <option value="Caen"></option>
+        <option value="Dijon"></option>
+        <option value="Clermont-Ferrand"></option>
+        <option value="Strasbourg"></option>
+    </datalist>
+</div>
+<div>
+    <label for="arrivee-search">Arrivée:</label>
+    <input type="text" id="arrivee-search" placeholder="Ville d'arrivée" list="villes-arrivee-suggestions">
+    <datalist id="villes-arrivee-suggestions">
+        <option value="Biarritz"></option>
+        <option value="La Rochelle"></option>
+        <option value="Lyon"></option>
+        <option value="Montluçon"></option>
+        <option value="Lille"></option>
+    </datalist>
+</div>
+            <button onclick="searchCarpools()">Rechercher</button>
+        </div>
+
+        <div class="filters">
+            <div>
+                <label for="min-price">Prix Min:</label>
+                <input type="number" id="min-price" min="0" step="1">
+            </div>
+            <div>
+                <label for="max-price">Prix Max:</label>
+                <input type="number" id="max-price" min="0" step="1">
+            </div>
+            <div>
+                <label for="rating-filter">Note Chauffeur Min:</label>
+                <select id="rating-filter">
+                    <option value="0">Toutes</option>
+                    <option value="1">1 étoile et plus</option>
+                    <option value="2">2 étoiles et plus</option>
+                    <option value="3">3 étoiles et plus</option>
+                    <option value="4">4 étoiles et plus</option>
+                    <option value="5">5 étoiles</option>
+                </select>
+            </div>
+            <div>
+                <label for="vehicle-type-filter">Type de Véhicule:</label>
+                <select id="vehicle-type-filter">
+                    <option value="all">Tous</option>
+                    <option value="electric">Électrique</option>
+                    <option value="non-electric">Non Électrique</option>
+                </select>
+            </div>
+        </div>
+
+        <section id="carpool-results">
+            <h2>Covoiturages Disponibles</h2>
+            <ul class="carpool-list">
+                <li class="carpool-item" data-price="9" data-rating="1" data-vehicle="non-electric">
+                    <div class="driver-info">
+                        <img src="Alex Alexcalibur.png" alt="Photo de Alex">
+                        <span><a href="Profil de Alex.html">Alexcalibur</a> (22ans)</span>
+                        <span><span class="star-rating">⭐</span> (1/5)</span>
+                    </div>
+                    <div class="carpool-details-summary">
+                        De <strong>Clermont-Ferrand</strong> à <strong>Montluçon</strong><br>
+                        Le <strong>22/05/2025</strong> à <strong>21h30</strong><br>
+                        Prix: <strong style="font-size: 1.2em; color: #4ba7ac;">9 €</strong> <span class="non-ecological">(Non Électrique)</span>
+                    </div>
+                    <button class="details-button" onclick="toggleDetails(this)">Détails</button>
+                    <div class="carpool-details-expanded">
+                        <h3>Détails du Covoiturage</h3>
+                        <p><strong>Trajet:</strong> Clermont-Ferrand <span style="font-size: 1.2em;">➡️</span> Montluçon</p>
+                        <p><strong>Date & Heure:</strong> 22/05/2025 à 21h30 (Arrivée : 22h40 - Durée : 1h10)</p>
+                        <p><strong>Prix par place:</strong> 9.00 €</p>
+                        <p><strong>Chauffeur:</strong> Alexcalibur (Note:⭐)</p>
+                        <p><strong>Véhicule:</strong> Peugeot 206 Bleu - <span class="non-ecological">Non Électrique</span></p>
+                        <p><strong>Places disponibles:</strong> 3</p>
+                        <h4>Préférences du Chauffeur:</h4>
+                        <ul class="preferences">
+                            <li>🚬 Accepté</li>
+                            <li>🐶🐱 Accepté</li>
+                            <li>🗣️ Accepté</li>
+                            <li>🎶 Accepté</li>
+                        </ul>
+                        <button class="participate-button">Participer au Covoiturage</button>
+                    </div>
+                </li>
+
+                <li class="carpool-item" data-price="25" data-rating="4" data-vehicle="electric">
+                    <div class="driver-info">
+                        <img src="Antoine.png" alt="Photo de Antoine">
+                        <span><a href="Profil de Antoine.html">Antoine.A</a> (44 ans)</span>
+                        <span><span class="star-rating">⭐⭐⭐⭐⭐</span> (5/5)</span>
+                    </div>
+                    <div class="carpool-details-summary">
+                        De <strong>Caen</strong> à <strong>La Rochelle</strong><br>
+                        Le <strong>28/05/2025</strong> à <strong>08h00</strong><br>
+                        Prix: <strong style="font-size: 1.2em; color: #4ba7ac;">25 €</strong> <span class="ecological">(Électrique)</span>
+                    </div>
+                    <button class="details-button" onclick="toggleDetails(this)">Détails</button>
+                    <div class="carpool-details-expanded">
+                        <h3>Détails du Covoiturage</h3>
+                        <p><strong>Trajet:</strong> Caen <span style="font-size: 1.2em;">➡️</span> La Rochelle</p>
+                        <p><strong>Date & Heure:</strong> 28/05/2025 à 08h00 (Arrivée : 12h30 - Durée : 4h30)</p>
+                        <p><strong>Prix par place:</strong> 25.00 €</p>
+                        <p><strong>Chauffeur:</strong> Antoine (Note: ⭐⭐⭐⭐⭐)</p>
+                        <p><strong>Véhicule:</strong> Skooda Octavia Combi Gris Anthracite - <span class="ecological">Électrique</span></p>
+                        <p><strong>Places disponibles:</strong> 3</p>
+                        <h4>Préférences du Chauffeur:</h4>
+                        <ul class="preferences">
+                            <li>🚬 Non Accepté</li>
+                            <li>🐶🐱 Non Accepté</li>
+                            <li>🗣️ Accepté</li>
+                            <li>🎶 Non Accepté</li>
+                        </ul>
+                        <button class="participate-button">Participer au Covoiturage</button>
+                    </div>
+                </li>
+
+                <li class="carpool-item" data-price="18" data-rating="5" data-vehicle="electric">
+                    <div class="driver-info">
+                        <img src="Chloé C.Jaune.png" alt="Photo de Chloé">
+                        <span><a href="Profil de Chloé.html">C.Jaune</a> (19 ans)</span>
+                        <span><span class="star-rating">⭐⭐⭐</span> (3/5)</span>
+                    </div>
+                    <div class="carpool-details-summary">
+                        De <strong>Lyon</strong> à <strong>Dijon</strong><br>
+                        Le <strong>30/05/2025</strong> à <strong>14h00</strong><br>
+                        Prix: <strong style="font-size: 1.2em; color: #4ba7ac;">18 €</strong> <span class="ecological">(Électrique)</span>
+                    </div>
+                    <button class="details-button" onclick="toggleDetails(this)">Détails</button>
+                    <div class="carpool-details-expanded">
+                        <h3>Détails du Covoiturage</h3>
+                        <p><strong>Trajet:</strong> Lyon <span style="font-size: 1.2em;">➡️</span> Dijon</p>
+                        <p><strong>Date & Heure:</strong> 30/05/2025 à 14h00 (Arrivée : 16h15 - Durée : 2h15)</p>
+                        <p><strong>Prix par place:</strong> 18.00 €</p>
+                        <p><strong>Chauffeur:</strong> Chloé (Note: ⭐⭐⭐)</p>
+                        <p><strong>Véhicule:</strong> Fiat 500 Jaune - <span class="non-ecological">Non Électrique</span></p>
+                        <p><strong>Places disponibles:</strong> 1</p>
+                        <h4>Préférences du Chauffeur:</h4>
+                        <ul class="preferences">
+                            <li>🚬 Accepté</li>
+                            <li>🐶🐱 Accepté</li>
+                            <li>🗣️ Accepté</li>
+                            <li>🎶 Accepté</li>
+                        </ul>
+                        <button class="participate-button">Participer au Covoiturage</button>
+                    </div>
+                </li>
+
+                <li class="carpool-item" data-price="8" data-rating="3" data-vehicle="non-electric">
+                    <div class="driver-info">
+                        <img src="Sophie.png" alt="Photo de Sophie">
+                        <span><a href="Profil de Sophie.html">Soph.64</a> (55ans)</span>
+                        <span><span class="star-rating">⭐⭐</span> (2/5)</span>
+                    </div>
+                    <div class="carpool-details-summary">
+                        De <strong>Pau</strong> à <strong>Biarritz</strong><br>
+                        Le <strong>30/05/2025</strong> à <strong>10h00</strong><br>
+                        Prix: <strong style="font-size: 1.2em; color: #4ba7ac;">8 €</strong> <span class="non-ecological">(Non Électrique)</span>
+                    </div>
+                    <button class="details-button" onclick="toggleDetails(this)">Détails</button>
+                    <div class="carpool-details-expanded">
+                        <h3>Détails du Covoiturage</h3>
+                        <p><strong>Trajet:</strong> Pau <span style="font-size: 1.2em;">➡️</span> Biarritz</p>
+                        <p><strong>Date & Heure:</strong> 30/05/2025 à 10h00 (Arrivée : 11h15 - Durée : 1h15)</p>
+                        <p><strong>Prix par place:</strong> 8.00 €</p>
+                        <p><strong>Chauffeur:</strong> Sophie (Note: ⭐⭐⭐)</p>
+                        <p><strong>Véhicule:</strong> Nissan Qashquai Noir - <span class="non-ecological">Non Électrique</span></p>
+                        <p><strong>Places disponibles:</strong> 1</p>
+                        <h4>Préférences du Chauffeur:</h4>
+                        <ul class="preferences">
+                            <li>🚬 Non Accepté</li>
+                            <li>🐶🐱 Non Accepté</li>
+                            <li>🗣️ Non Accepté</li>
+                            <li>🎶 Non Accepté</li>
+                        </ul>
+                        <button class="participate-button">Participer au Covoiturage</button>
+                    </div>
+                </li>
+
+                <li class="carpool-item" data-price="30" data-rating="4.5" data-vehicle="electric">
+                    <div class="driver-info">
+                        <img src="Agathe Aggy.png" alt="Photo de Agathe">
+                        <span><a href="Profil de Agathe.html">Aggy</a> (32ans)</span>
+                        <span><span class="star-rating">⭐⭐⭐⭐</span> (4/5)</span>
+                    </div>
+                    <div class="carpool-details-summary">
+                        De <strong>Strasbourg</strong> à <strong>Lille</strong><br>
+                        Le <strong>26/05/2025</strong> à <strong>07h00</strong><br>
+                        Prix: <strong style="font-size: 1.2em; color: #4ba7ac;">30 €</strong> <span class="ecological">(Électrique)</span>
+                    </div>
+                    <button class="details-button" onclick="toggleDetails(this)">Détails</button>
+                    <div class="carpool-details-expanded">
+                        <h3>Détails du Covoiturage</h3>
+                        <p><strong>Trajet:</strong> Strasbourg <span style="font-size: 1.2em;">➡️</span> Lille</p>
+                        <p><strong>Date & Heure:</strong> 26/05/2025 à 07h00 (Arrivée : 11h45 - Durée : 4h45)</p>
+                        <p><strong>Prix par place:</strong> 35.00 €</p>
+                        <p><strong>Chauffeur:</strong> Aggy (Note: ⭐⭐⭐⭐)</p>
+                        <p><strong>Véhicule:</strong> Toyota Yaris Rouge - <span class="ecological">Électrique</span></p>
+                        <p><strong>Places disponibles:</strong> 2</p>
+                        <h4>Préférences du Chauffeur:</h4>
+                        <ul class="preferences">
+                            <li>🚬 Non Accepté</li>
+                            <li>🐶🐱 Non Accepté</li>
+                            <li>🗣️ Accepté</li>
+                            <li>🎶 Accepté</li>
+                        </ul>
+                        <button class="participate-button">Participer au Covoiturage</button>
+                    </div>
+                </li>
+
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <a href="Mentions Légales.html">Mentions légales</a>
+        <a href="mailto:contact@ecoride.fr">contact@ecoride.fr</a>
+        <p>&copy; 2025 EcoRide 🍃 - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
+
+    <script>
+        // Fonction pour afficher/masquer les détails d'un covoiturage
+        function toggleDetails(button) {
+            const carpoolItem = button.closest('.carpool-item');
+            const detailsExpanded = carpoolItem.querySelector('.carpool-details-expanded');
+
+            // Cache tous les autres détails ouverts
+            document.querySelectorAll('.carpool-details-expanded').forEach(detail => {
+                if (detail !== detailsExpanded && detail.style.display === 'block') {
+                    detail.style.display = 'none';
+                    detail.previousElementSibling.textContent = 'Détails';
+                }
+            });
+
+            // Affiche ou masque les détails cliqués
+            if (detailsExpanded.style.display === 'block') {
+                detailsExpanded.style.display = 'none';
+                button.textContent = 'Détails';
+            } else {
+                detailsExpanded.style.display = 'block';
+                button.textContent = 'Masquer';
+            }
+        }
+
+        // Fonction de recherche et filtrage des covoiturages
+        function searchCarpools() {
+            const departSearch = document.getElementById('depart-search').value.toLowerCase();
+            const arriveeSearch = document.getElementById('arrivee-search').value.toLowerCase();
+            const dateSearch = document.getElementById('date-search').value;
+            const minPrice = parseFloat(document.getElementById('min-price').value) || 0;
+            const maxPrice = parseFloat(document.getElementById('max-price').value) || Infinity;
+            const minRating = parseFloat(document.getElementById('rating-filter').value) || 0;
+            const vehicleTypeFilter = document.getElementById('vehicle-type-filter').value;
+
+            const carpoolItems = document.querySelectorAll('.carpool-list .carpool-item');
+
+            carpoolItems.forEach(item => {
+                const departText = item.querySelector('.carpool-details-summary').innerText.split('De ')[1].split(' à ')[0].toLowerCase();
+                const arriveeText = item.querySelector('.carpool-details-summary').innerText.split(' à ')[1].split('\n')[0].toLowerCase();
+                const dateText = item.querySelector('.carpool-details-summary').innerText.split('Le ')[1].split(' à ')[0];
+                const price = parseFloat(item.dataset.price);
+                const rating = parseFloat(item.dataset.rating);
+                const vehicleType = item.dataset.vehicle;
+
+                const matchesDepart = departSearch === '' || departText.includes(departSearch);
+                const matchesArrivee = arriveeSearch === '' || arriveeText.includes(arriveeSearch);
+                const matchesDate = dateSearch === '' || dateText === dateSearch; // Exact date match for simplicity
+                const matchesPrice = price >= minPrice && price <= maxPrice;
+                const matchesRating = rating >= minRating;
+                const matchesVehicleType = vehicleTypeFilter === 'all' || vehicleType === vehicleTypeFilter;
+
+                if (matchesDepart && matchesArrivee && matchesDate && matchesPrice && matchesRating && matchesVehicleType) {
+                    item.style.display = 'grid'; // Show as grid
+                } else {
+                    item.style.display = 'none'; // Hide
+                }
+            });
+        }
+
+        // Appel initial de la fonction de recherche pour afficher tous les éléments au chargement
+        document.addEventListener('DOMContentLoaded', searchCarpools);
+
+        // Appliquer les filtres à chaque changement des champs de filtre
+        document.getElementById('min-price').addEventListener('change', searchCarpools);
+        document.getElementById('max-price').addEventListener('change', searchCarpools);
+        document.getElementById('rating-filter').addEventListener('change', searchCarpools);
+        document.getElementById('vehicle-type-filter').addEventListener('change', searchCarpools);
+
+        // Au chargement, définir la date actuelle pour l'input date si non spécifiée
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const dateInput = document.getElementById('date-search');
+            if (!dateInput.value) {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0'); // Jan is 0
+                const day = String(today.getDate()).padStart(2, '0');
+                dateInput.value = `${year}-${month}-${day}`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRide 🍃</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Simonetta&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles Généraux */
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #fafafa, #abee90); /* Bleu vers Vert clair */
+            color: #3b1d1d; /* Marron foncé */
+            min-height: 100vh; /* Assure que le fond s'étend sur toute la hauteur de la fenêtre */
+        }
+
+        /* Header */
+        header {
+            background-color: #8fbc8f; /* Vert forêt clair */
+            color: #ffffff;
+            padding: 1em 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-family: 'Simonetta', cursive; /* Appliquer la police Simonetta au titre */
+            margin: 0;
+            font-size: 2em;
+        }
+
+        header h1 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Navigation */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 1em;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Contenu Principal */
+        main {
+            padding: 2em;
+        }
+
+        /* Section Hero (Accueil) */
+        .hero {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+
+        .hero h2 {
+            font-family: 'Simonetta', cursive;
+            color: inherit;
+        }
+
+        .hero p {
+            font-family: 'Karla', sans-serif;
+            color: #3d0f16;
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+
+        .hero p strong {
+            font-family: 'Simonetta', cursive;
+            color: inherit;
+        }
+
+        /* Styles spécifiques à la page d'accueil (si besoin, sinon à retirer) */
+        #accueil p:nth-child(1),
+        #accueil p:nth-child(2) {
+            font-family: 'Simonetta', cursive;
+            color: inherit;
+        }
+
+        /* Barre de recherche (si besoin, sinon à retirer) */
+        .search-bar {
+            display: flex;
+            gap: 0.5em;
+            margin-bottom: 1em;
+        }
+
+        .search-bar input[type="text"],
+        .search-bar input[type="date"],
+        .search-bar button {
+            padding: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #3d0f16; /* Marron foncé */
+        }
+
+        .search-bar button {
+            background-color: #8fbc8f; /* Vert forêt clair */
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Liste des covoiturages (si besoin, sinon à retirer) */
+        .carpool-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        /* Item de covoiturage */
+        .carpool-item {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1em;
+            align-items: center;
+            color: #3d0f16; /* Marron foncé */
+        }
+
+        .carpool-item .driver-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        .carpool-item .driver-info img {
+            width: 80px; /* Ajusté pour correspondre à l'inline original */
+            height: 80px; /* Ajusté pour correspondre à l'inline original */
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px; /* Ajusté pour correspondre à l'inline original */
+        }
+
+        .carpool-item .trip-details {
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .carpool-item .trip-details .price {
+            font-size: 1.5em;
+            color: #4ba7ac;
+        }
+
+        .carpool-item .trip-details .non-electric-vehicle {
+            color: #ff0000; /* Rouge pour le véhicule non électrique */
+        }
+
+        .carpool-item .preferences {
+            list-style-type: none;
+            padding-left: 0;
+            text-align: center;
+        }
+
+        .carpool-item .preferences li {
+            margin-bottom: 0.3em;
+            text-align: center;
+        }
+
+        .ecological {
+            color: #388e3c; /* Vert plus foncé pour l'écologique */
+            font-weight: bold;
+        }
+
+        /* Bouton de détails */
+        .details-button {
+            display: inline-block;
+            border: 1px solid #f0edea;
+            border-radius: 5px;
+            background-color: #e8a153; /* Orange */
+            color: inherit; /* Hérite de la couleur du texte parent */
+            cursor: pointer;
+            text-align: center;
+            white-space: nowrap;
+            padding: 8px 12px;
+            font-size: 1.1em;
+            text-decoration: none; /* Pour enlever le soulignement si le lien est intégré */
+        }
+
+        .details-button a {
+            color: inherit; /* Hérite de la couleur du bouton */
+            text-decoration: none;
+        }
+
+        /* Filtres (si besoin, sinon à retirer) */
+        .filters {
+            margin-bottom: 1.5em;
+            padding: 1em;
+            background-color: #e8f5e9; /* Vert très clair */
+            border: 1px solid #c8e6c9;
+            border-radius: 5px;
+            display: flex;
+            gap: 1em;
+            align-items: center;
+            color: #3b1d1d; /* Marron foncé */
+        }
+
+        .filters label {
+            margin-right: 0.5em;
+        }
+
+        .filters input[type="number"],
+        .filters select {
+            padding: 0.3em;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #3d0f16; /* Marron foncé */
+        }
+
+        /* Section de détails du covoiturage (si besoin, sinon à retirer) */
+        .carpool-details-section {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            color: #3d0f16; /* Marron foncé */
+        }
+
+        .carpool-details-section h2 {
+            color: #558b2f;
+        }
+
+        /* Avis du conducteur */
+        .driver-reviews {
+            display: none; /* Caché par défaut */
+            margin-top: 10px;
+            border-top: 1px solid #ccc; /* Correction de la couleur de la bordure */
+            padding-top: 10px;
+        }
+
+        /* Sections d'authentification (si besoin, sinon à retirer) */
+        .auth-section {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            color: #3d0f16; /* Marron foncé */
+        }
+
+        .auth-section h2 {
+            color: #558b2f;
+        }
+
+        .auth-section label {
+            display: block;
+            margin-bottom: 0.3em;
+        }
+
+        .auth-section input[type="text"],
+        .auth-section input[type="email"],
+        .auth-section input[type="password"] {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 0.8em;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            color: #3d0f16; /* Marron foncé */
+        }
+
+        .auth-section button {
+            background-color: #558b2f;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Panneau utilisateur (si besoin, sinon à retirer) */
+        .user-panel {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            color: #3d0f16; /* Marron foncé */
+        }
+
+        .user-panel h2 {
+            color: #558b2f;
+        }
+
+        .user-panel label {
+            display: block;
+            margin-bottom: 0.3em;
+        }
+
+        .user-panel input[type="text"],
+        .user-panel input[type="date"],
+        .user-panel select {
+            padding: 0.5em;
+            margin-bottom: 0.8em;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            color: #3d0f16; /* Marron foncé */
+        }
+
+        /* Footer */
+        footer {
+            background-color: #c8e6c9; /* Couleur pour le footer */
+            color: #333;
+            padding: 1em 2em;
+            text-align: center;
+            border-top: 1px solid #22d3b5;
+        }
+
+        footer a {
+            color: #e8a153;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="./Ecoride.html">EcoRide 🍃</a></h1>
+        <nav>
+            <ul>
+                <li><a href="./Ecoride.html">Accueil</a></li>
+                <li><a href="./Connexion.html">Connexion</a></li>
+                <li><a href="./Contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="carpool-details">
+            <div class="carpool-item">
+                <div class="driver-info">
+                    <img src="./Sophie.png" alt="Photo de Sophie" />
+                    <div>
+                        <a href="./Profil de Sophie.html">Soph.64</a> (55ans)
+                        <br />
+                        <strong>Note : 3.8/5</strong>
+                    </div>
+                </div>
+
+                <div class="trip-details">
+                    <span>Pau</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                    <span>Biarritz</span><br />
+                    <strong>Départ : 12h30</strong>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                    <strong>Arrivée : 15h10</strong>
+                    <br />
+                    <strong>Durée : 1h40</strong>
+                    <br />
+                    <small>Nissan Qashquai Noir</small>
+                    <br />
+                    <small class="non-electric-vehicle">Véhicule Non Électrique</small>
+                    <div class="price">
+                        <strong>8 €</strong>
+                    </div>
+                </div>
+
+                <ul class="preferences">
+                    <li>🚬 Non Accepté</li>
+                    <li>🐶🐱 Non Accepté</li>
+                    <li>🗣️ Non Accepté</li>
+                    <li>🎶 Non Accepté</li>
+                </ul>
+            </div>
+
+            <button class="details-button" onclick="toggleReviews('sophie-reviews-section', this)">
+                <a href="./Avis Sophie.html">Voir Les Avis (5)</a>
+            </button>
+
+            <div class="driver-reviews" id="sophie-reviews-section">
+                <p>Ceci est un exemple d'avis pour Soph.64 : "Très bon trajet, conducteur agréable."</p>
+                <p>Un autre avis : "Ponctuel et conduite souple."</p>
+            </div>
+        </section>
+    </main>
+
+    
+    <script>
+        function toggleReviews(reviewsId, button) {
+            const reviewsDiv = document.getElementById(reviewsId);
+            const linkElement = button.querySelector('a'); // Récupère l'élément <a> à l'intérieur du bouton
+
+            if (reviewsDiv.style.display === 'none' || reviewsDiv.style.display === '') {
+                reviewsDiv.style.display = 'block';
+                // Stocke le texte original du lien dans un attribut de données du bouton
+                button.setAttribute('data-original-text', linkElement.textContent);
+                linkElement.textContent = 'Masquer Les Avis (5)'; // Change le texte du lien
+            } else {
+                reviewsDiv.style.display = 'none';
+                // Restaure le texte original du lien
+                linkElement.textContent = button.getAttribute('data-original-text');
+            }
+        }
+    </script>
+</body>
+</html>
+    </main>
+    <footer>
+        <a href="Mentions Légales.html">Mentions légales</a>
+        <a href="mailto:contact@ecoride.fr">contact@ecoride.fr</a>
+        <p>&copy; 2025 EcoRide 🍃 - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Administrateur - Tableau de Bord EcoRide 🍃</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Simonetta&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styling from EcoRide, adapted for Admin */
+        body {
+            font-family: 'Karla', sans-serif; /* Use Karla for general text */
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f8f8f8, #e0e0e0); /* Subtle gradient for admin */
+            color: #333; /* Darker text for readability */
+        }
+
+        /* Header styling - retaining admin's dark theme but with EcoRide fonts */
+        .header {
+            background-color: #2c3e50; /* Dark blue/grey for admin */
+            color: white;
+            padding: 1em 2em; /* Adjusted padding for EcoRide feel */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow */
+        }
+        .header h1 {
+            font-family: 'Simonetta', cursive; /* Simonetta for the main title */
+            margin: 0;
+            font-size: 2em; /* Adjusted font size */
+        }
+        .header nav ul { /* Added ul for consistency with EcoRide nav */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        .header nav ul li {
+            margin-left: 1.5em; /* Spacing between nav items */
+        }
+        .header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            padding: 0.5em 0; /* Added padding for better click area */
+        }
+        .header nav a:hover {
+            color: #ecf0f1; /* Lighter shade on hover */
+            text-decoration: underline;
+        }
+
+        /* Container styling - adopting EcoRide's rounded corners and shadows */
+        .container {
+            padding: 2em; /* Increased padding */
+            max-width: 1400px;
+            margin: 2em auto; /* Adjusted margin */
+            background-color: #fff;
+            border-radius: 10px; /* More rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+        }
+
+        /* Headings - using Simonetta for main sections */
+        h2 {
+            font-family: 'Simonetta', cursive; /* Simonetta for section titles */
+            color: #2c3e50;
+            margin-bottom: 1.5em; /* Adjusted margin */
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5em;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5em; /* Adjusted gap */
+            margin-top: 2em; /* Adjusted margin */
+        }
+
+        /* Card styling - EcoRide's soft feel with admin colors */
+        .card {
+            background-color: #eaf2f8; /* Light blue */
+            border: 1px solid #d0e7f7;
+            border-radius: 10px; /* Rounded corners */
+            padding: 1.5em; /* Adjusted padding */
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+            transition: transform 0.2s ease-in-out; /* Added hover effect */
+        }
+        .card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+        .card h3 {
+            font-family: 'Simonetta', cursive; /* Simonetta for card titles */
+            color: #3498db; /* Blue heading */
+            margin-top: 0;
+            font-size: 1.8em; /* Slightly larger font */
+        }
+        .card p {
+            font-family: 'Karla', sans-serif; /* Karla for card text */
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 1.2em;
+        }
+        .card .big-number {
+            font-family: 'Karla', sans-serif; /* Karla for numbers */
+            font-size: 3em; /* Larger number */
+            font-weight: bold;
+            color: #28a745; /* Green for total credits */
+            margin-bottom: 1.2em;
+        }
+
+        /* Button styling - EcoRide's button look with admin colors */
+        .card a, .card button {
+            display: inline-block;
+            background-color: #3498db; /* Admin blue */
+            color: white;
+            padding: 0.8em 1.5em; /* EcoRide padding */
+            border: none;
+            border-radius: 8px; /* Slightly rounded */
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .card a:hover, .card button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+            transform: translateY(-2px); /* Lift effect */
+        }
+
+        /* Chart specific styling - EcoRide's soft feel with admin colors */
+        .chart-section {
+            background-color: #fff;
+            padding: 1.5em; /* Adjusted padding */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow */
+            margin-top: 2em; /* Adjusted margin */
+        }
+        .chart-section h3 {
+            font-family: 'Simonetta', cursive; /* Simonetta for chart titles */
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 1.5em;
+        }
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px; /* Rounded corners */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <h1>Tableau de Bord Administrateur</h1>
+        <nav>
+            <ul>
+                <li><a href="/admin/create-employee">Créer un Employé</a></li>
+                <li><a href="/admin/manage-accounts">Gérer les Comptes</a></li>
+                <li><a href="/logout">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Aperçu Général de la Plateforme</h2>
+
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>Crédits Totaux Gagnés</h3>
+                <p class="big-number">0 €</p> <p>Montant total cumulé par la plateforme.</p>
+            </div>
+
+            <div class="card">
+                <h3>Gestion des Employés</h3>
+                <p>Créez de nouveaux comptes pour les employés.</p>
+                <a href="/admin/create-employee">Créer un Compte Employé</a>
+            </div>
+
+            <div class="card">
+                <h3>Gestion des Comptes Utilisateurs & Employés</h3>
+                <p>Suspendez ou réactivez des comptes si nécessaire.</p>
+                <a href="/admin/manage-accounts">Gérer les Comptes</a>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h3>Nombre de Covoiturages par Jour</h3>
+            <div class="chart-container">
+                <canvas id="carpoolsChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-section" style="margin-top: 30px;">
+            <h3>Gains de Crédit par Jour</h3>
+            <div class="chart-container">
+                <canvas id="creditsChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Scripts pour Chart.js - Ces données seraient fournies par le backend
+        document.addEventListener('DOMContentLoaded', function() {
+            // Données pour le graphique des covoiturages (exemple)
+            const carpoolsData = {
+                labels: ['20 Mai', '21 Mai', '22 Mai', '23 Mai', '24 Mai', '25 Mai', '26 Mai'],
+                datasets: [{
+                    label: 'Nombre de Covoiturages',
+                    data: [0, 0, 0, 0, 0, 0, 0], // All numbers set to zero
+                    backgroundColor: 'rgba(52, 152, 219, 0.7)', // Blue
+                    borderColor: 'rgba(41, 128, 185, 1)',
+                    borderWidth: 1,
+                    tension: 0.3
+                }]
+            };
+
+            const carpoolsCtx = document.getElementById('carpoolsChart').getContext('2d');
+            new Chart(carpoolsCtx, {
+                type: 'line',
+                data: carpoolsData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Nombre de Covoiturages'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Jour'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    }
+                }
+            });
+
+            // Données pour le graphique des crédits (exemple)
+            const creditsData = {
+                labels: ['20 Mai', '21 Mai', '22 Mai', '23 Mai', '24 Mai', '25 Mai', '26 Mai'],
+                datasets: [{
+                    label: 'Crédits Gagnés (€)',
+                    data: [0, 0, 0, 0, 0, 0, 0], // All numbers set to zero
+                    backgroundColor: 'rgba(40, 167, 69, 0.7)', // Green
+                    borderColor: 'rgba(30, 130, 76, 1)',
+                    borderWidth: 1,
+                    tension: 0.3
+                }]
+            };
+
+            const creditsCtx = document.getElementById('creditsChart').getContext('2d');
+            new Chart(creditsCtx, {
+                type: 'bar', // Peut être 'bar' ou 'line'
+                data: creditsData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Crédits Gagnés (€)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Jour'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+    </main>
+    <footer>
+        <a href="Mentions Légales.html">Mentions légales</a>
+        <a href="mailto:contact@ecoride.fr">contact@ecoride.fr</a>
+        <p>&copy; 2025 EcoRide 🍃 - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

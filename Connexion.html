@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - EcoRide 🍃</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Simonetta&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #fafafa, #abee90);
+            color: #3b1d1d;
+            display: flex; /* Use flexbox for centering */
+            flex-direction: column; /* Stack header, main, footer vertically */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #8fbc8f;
+            color: #ffffff;
+            padding: 1em 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-family: 'Simonetta', cursive;
+            margin: 0;
+            font-size: 2em;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 1em;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 2em;
+            display: flex;
+            justify-content: center; /* Center the form horizontally */
+            align-items: center; /* Center the form vertically */
+            flex-grow: 1; /* Allow main to take up available space */
+        }
+
+        /* Auth Section (Login Form Container) Styles */
+        .auth-section {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            padding: 2.5em; /* Increased padding for better appearance */
+            border-radius: 8px; /* Slightly more rounded corners */
+            color: #3d0f16;
+            width: 100%;
+            max-width: 420px; /* Adjusted max-width */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Stronger shadow */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        .auth-section h2 {
+            color: #558b2f;
+            text-align: center;
+            margin-bottom: 1.8em; /* Adjusted margin */
+            font-size: 2em; /* Larger heading */
+        }
+        .form-group {
+            margin-bottom: 1.5em; /* Spacing between form groups */
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6em;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .auth-section input[type="text"] { /* Added text type for username */
+            width: 100%;
+            padding: 0.8em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1.1em;
+            color: #3d0f16;
+        }
+        .auth-section button {
+            background-color: #558b2f;
+            color: white;
+            border: none;
+            padding: 1em 1.5em; /* Increased button padding */
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            font-size: 1.2em; /* Larger button font */
+            transition: background-color 0.3s ease;
+            margin-top: 1em; /* Space above the button */
+        }
+        .auth-section button:hover {
+            background-color: #4CAF50;
+        }
+
+        /* Message Styles */
+        #message {
+            margin-top: 1.5em; /* Adjusted margin for clarity */
+            padding: 1em;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1em;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #c8e6c9;
+            color: #333;
+            padding: 1em 2em;
+            text-align: center;
+            border-top: 1px solid #22d3b5;
+        }
+        footer a {
+            color: #e8a153;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="margin: 0;"><a href="Ecoride.html" style="color: inherit; text-decoration: none;">EcoRide 🍃</a></h1>
+        <nav>
+            <ul>
+                <li><a href="Ecoride.html">Accueil</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-section">
+            <h2>Connectez-vous à EcoRide 🍃</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur / Email :</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Se connecter</button>
+            </form>
+            <div id="message" style="display: none;"></div>
+        </div>
+    </main>
+
+    </main>
+    <footer>
+        <a href="Mentions Légales.html">Mentions légales</a>
+        <a href="mailto:contact@ecoride.fr">contact@ecoride.fr</a>
+        <p>&copy; 2025 EcoRide 🍃 - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
+
+    <<script>
+    const loginForm = document.getElementById('loginForm');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const messageDiv = document.getElementById('message');
+
+    const utilisateursValides = {
+        "opelia@ecoride.fr": "motdepasseopelia", // Correct credentials
+    };
+
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const enteredUsername = usernameInput.value;
+        const enteredPassword = passwordInput.value;
+
+        messageDiv.style.display = 'none';
+        messageDiv.className = '';
+
+        if (utilisateursValides[enteredUsername] === enteredPassword) {
+            messageDiv.textContent = 'Connexion réussie ! Redirection...';
+            messageDiv.classList.add('success');
+            messageDiv.style.display = 'block';
+
+            let userRole;
+            if (enteredUsername === "opelia@ecoride.fr") {
+                userRole = "chauffeur";
+            } else {
+                userRole = "passager"; // Fallback, though only 'opelia' is defined here
+            }
+            sessionStorage.setItem('userRole', userRole); // Store the role
+
+            // Redirect to the user space page
+            setTimeout(() => {
+                window.location.href = "Passager ou Chauffeur.html"; // UPDATED REDIRECTION
+            }, 1500);
+        } else {
+            messageDiv.textContent = 'Identifiant ou mot de passe incorrect.';
+            messageDiv.classList.add('error');
+            messageDiv.style.display = 'block';
+        }
+    });
+</script>
+</body>
+</html>

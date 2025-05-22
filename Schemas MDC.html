@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schéma de Base de Données (MCD) - Plateforme de Covoiturage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #2ecc71;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .attribute-key {
+            font-weight: bold;
+            color: #e74c3c; /* Red for PK/FK */
+        }
+        .attribute-detail {
+            font-style: italic;
+            color: #666;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        strong {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Modèle Conceptuel de Données (MCD)</h1>
+        <p>Ce document décrit la structure de la base de données relationnelle pour la plateforme de covoiturage, incluant les entités principales, leurs attributs et les relations entre elles.</p>
+
+        <h2>Entités</h2>
+
+        <h3>UTILISATEUR</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Attribut</th>
+                    <th>Type de Donnée</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="attribute-key">id_utilisateur</span></td>
+                    <td>INT</td>
+                    <td>Clé Primaire (PK)</td>
+                </tr>
+                <tr>
+                    <td>pseudo</td>
+                    <td>VARCHAR(255)</td>
+                    <td>Nom d'utilisateur visible</td>
+                </tr>
+                <tr>
+                    <td><span class="attribute-key">email</span></td>
+                    <td>VARCHAR(255)</td>
+                    <td>Unique (UK), utilisé pour la connexion</td>
+                </tr>
+                <tr>
+                    <td>mot_de_passe_hache</td>
+                    <td>VARCHAR(255)</td>
+                    <td>Stockage sécurisé du mot de passe (haché)</td>
+                </tr>
+                <tr>
+                    <td>role</td>
+                    <td>VARCHAR(50)</td>
+                    <td>'participant', 'chauffeur', 'employe', 'administrateur'</td>
+                </tr>
+                <tr>
+                    <td>est_suspendu</td>
+                    <td>BOOLEAN</td>
+                    <td>Par défaut FALSE, TRUE si suspendu par un administrateur</td>
+                </tr>
+                <tr>
+                    <td>date_creation</td>
+                    <td>DATETIME</td>
+                    <td>Date et heure de création du compte</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>COVOITURAGE</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Attribut</th>
+                    <th>Type de Donnée</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="attribute-key">id_covoiturage</span></td>
+                    <td>INT</td>
+                    <td>Clé Primaire (PK)</td>
+                </tr>
+                <tr>
+                    <td><span class="attribute-key">id_chauffeur</span></td>
+                    <td>INT</td>
+                    <td>Clé Étrangère (FK) vers UTILISATEUR(id_utilisateur)</td>
+                </tr>
+                <tr>
+                    <td><span class="attribute-key">id_participant</span></td>
+                    <td>INT</td>
+                    <td>Clé Étrangère (FK) vers UTILISATEUR(id_utilisateur)</td>
+                </tr>
+                <tr>
+                    <td>date_depart</td>
+                    <td>DATE</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>heure_depart</td>
+                    <td>TIME</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>lieu_depart</td>
+                    <td>VARCHAR(255)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>date_arrivee</td>
+                    <td>DATE</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>heure_arrivee</td>
+                    <td>TIME</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>lieu_arrivee</td>
+                    <td>VARCHAR(255)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>statut</td>
+                    <td>VARCHAR(50)</td>
+                    <td>'planifié', 'en_cours', 'terminé', 'annulé', 'problème'</td>
+                </tr>
+                <tr>
+                    <td>credits_gagnee</td>
+                    <td>DECIMAL(10, 2)</td>
+                    <td>Crédits générés pour la plateforme par ce covoiturage</td>
+                </tr>
+                <tr>
+                    <td>date_creation</td>
+                    <td>DATETIME</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>AVIS</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Attribut</th>
+                    <th>Type de Donnée</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="attribute-key">id_avis</span></td>
+                    <td>INT</td>
+                    <td>Clé Primaire (PK)</td>
+                </tr>
+                <tr>
+                    <td><span class="attribute-key">id_covoiturage</span></td>
+                    <td>INT</td>
+                    <td>Clé Étrangère (FK) vers COVOITURAGE(id_covoiturage)</td>
+                </tr>
+                <tr>
+                    <td><span class="attribute-key">id_redacteur</span></td>
+                    <td>INT</td>
+                    <td>Clé Étrangère (FK) vers UTILISATEUR(id_utilisateur) - le participant</td>
+                </tr>
+                <tr>
+                    <td><span class="attribute-key">id_chauffeur_evalue</span></td>
+                    <td>INT</td>
+                    <td>Clé Étrangère (FK) vers UTILISATEUR(id_utilisateur) - le chauffeur évalué</td>
+                </tr>
+                <tr>
+                    <td>note</td>
+                    <td>INT</td>
+                    <td>Note donnée, ex: 1 à 5</td>
+                </tr>
+                <tr>
+                    <td>commentaire</td>
+                    <td>TEXT</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>date_depot</td>
+                    <td>DATETIME</td>
+                    <td>Date et heure de soumission de l'avis</td>
+                </tr>
+                <tr>
+                    <td>statut_moderation</td>
+                    <td>VARCHAR(50)</td>
+                    <td>'en_attente', 'approuve', 'rejete'</td>
+                </tr>
+                <tr>
+                    <td><span class="attribute-key">id_employe_moderateur</span></td>
+                    <td>INT</td>
+                    <td>Clé Étrangère (FK) vers UTILISATEUR(id_utilisateur), NULL si non modéré</td>
+                </tr>
+                <tr>
+                    <td>date_moderation</td>
+                    <td>DATETIME</td>
+                    <td>NULL si non modéré</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>PROBLEME_COVOITURAGE</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Attribut</th>
+                    <th>Type de Donnée</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="attribute-key">id_probleme</span></td>
+                    <td>INT</td>
+                    <td>Clé Primaire (PK)</td>
+                </tr>
+                <tr>
+                    <td><span class="attribute-key">id_covoiturage</span></td>
+                    <td>INT</td>
+                    <td>Clé Étrangère (FK) vers COVOITURAGE(id_covoiturage)</td>
+                </tr>
+                <tr>
+                    <td><span class="attribute-key">id_signaleur</span></td>
+                    <td>INT</td>
+                    <td>Clé Étrangère (FK) vers UTILISATEUR(id_utilisateur)</td>
+                </tr>
+                <tr>
+                    <td>type_probleme</td>
+                    <td>VARCHAR(100)</td>
+                    <td>Ex: 'retard', 'annulation_abusive', 'mauvais_comportement', 'autre'</td>
+                </tr>
+                <tr>
+                    <td>description_probleme</td>
+                    <td>TEXT</td>
+                    <td>Description détaillée du problème</td>
+                </tr>
+                <tr>
+                    <td>date_signalement</td>
+                    <td>DATETIME</td>
+                    <td>Date et heure du signalement</td>
+                </tr>
+                <tr>
+                    <td>statut_resolution</td>
+                    <td>VARCHAR(50)</td>
+                    <td>'nouveau', 'en_cours', 'résolu', 'fermé'</td>
+                </tr>
+                <tr>
+                    <td><span class="attribute-key">id_employe_assigne</span></td>
+                    <td>INT</td>
+                    <td>Clé Étrangère (FK) vers UTILISATEUR(id_utilisateur), NULL si non assigné</td>
+                </tr>
+                <tr>
+                    <td>date_resolution</td>
+                    <td>DATETIME</td>
+                    <td>NULL si non résolu</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Relations</h2>
+        <ul>
+            <li><strong>UTILISATEUR</strong> peut être le **chauffeur** de plusieurs **COVOITURAGES** (via `id_chauffeur`).</li>
+            <li><strong>UTILISATEUR</strong> peut être le **participant** de plusieurs **COVOITURAGES** (via `id_participant`).</li>
+            <li>Un **UTILISATEUR** (participant) peut **rédiger** plusieurs **AVIS** (via `id_redacteur`).</li>
+            <li>Un **UTILISATEUR** (chauffeur) peut être **évalué** dans plusieurs **AVIS** (via `id_chauffeur_evalue`).</li>
+            <li>Un **UTILISATEUR** (employé) peut **modérer** plusieurs **AVIS** (via `id_employe_moderateur`).</li>
+            <li>Un **UTILISATEUR** peut **signaler** plusieurs **PROBLEMES_COVOITURAGE** (via `id_signaleur`).</li>
+            <li>Un **UTILISATEUR** (employé) peut **gérer** plusieurs **PROBLEMES_COVOITURAGE** (via `id_employe_assigne`).</li>
+            <li>Un **COVOITURAGE** peut avoir plusieurs **AVIS**.</li>
+            <li>Un **COVOITURAGE** peut être l'objet de plusieurs **PROBLEMES_COVOITURAGE**.</li>
+        </ul>
+    </div>
+</body>
+</html>
